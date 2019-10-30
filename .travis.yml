@@ -19,7 +19,7 @@ install:
 
 script:
  - MACHINE=raspberrypi source ./setup-environment
- - MACHINE=raspberrypi bitbake binutils-cross-arm
+ - MACHINE=raspberrypi bitbake binutils-cross-arm gcc-cross-arm
 
 cache:
   directories:
