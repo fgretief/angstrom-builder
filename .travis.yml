@@ -4,16 +4,17 @@ sudo: required
 language: shell
 
 before_install:
- - mkdir -p ~/bin
- - curl http://commondatastorage.googleapis.com/git-repo-downloads/repo -o ~/bin/repo
- - chmod a+x ~/bin/repo
  - sudo apt-get -y install repo gawk wget git-core diffstat unzip texinfo gcc-multilib build-essential chrpath socat cpio python python3 python3-pip python3-pexpect xz-utils debianutils iputils-ping libsdl1.2-dev xterm
+ - git config --global color.ui false
 
 install:
- - git config --global color.ui false
  - repo init -u https://github.com/fgretief/angstrom-manifest -b angstrom-v2019.06-warrior
  - repo sync
 
 script:
- - MACHINE=raspberrypi . ./setup-environment
+ - MACHINE=raspberrypi source ./setup-environment
  - MACHINE=raspberrypi bitbake core-image-minimal
+
+cache:
+  directories:
+  - sstate-cache
