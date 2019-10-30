@@ -3,8 +3,14 @@ dist: bionic
 sudo: required
 language: shell
 
+addons:
+  apt:
+    packages:
+    - repo
+    - python3
+
 before_install:
- - sudo apt-get -y install repo gawk wget git-core diffstat unzip texinfo gcc-multilib build-essential chrpath socat cpio python python3 python3-pip python3-pexpect xz-utils debianutils iputils-ping libsdl1.2-dev xterm
+ - sudo apt-get -y install gawk wget git-core diffstat unzip texinfo gcc-multilib build-essential chrpath socat cpio python python3 python3-pip python3-pexpect xz-utils debianutils iputils-ping libsdl1.2-dev xterm
  - git config --global color.ui false
 
 install:
@@ -13,8 +19,10 @@ install:
 
 script:
  - MACHINE=raspberrypi source ./setup-environment
- - MACHINE=raspberrypi bitbake core-image-minimal
+ - MACHINE=raspberrypi bitbake binutils-cross-arm
 
 cache:
   directories:
+  - buildhistory
+  - cache
   - sstate-cache
