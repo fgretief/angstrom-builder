@@ -4,11 +4,13 @@ on: [push]
 
 jobs:
   build:
-
+    # Job name is Angstrom
+    name: Angstrom
+    # This job runs on Linux
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@master
     - name: Prepare environment
       run: |
         sudo apt-get -y update
@@ -18,7 +20,7 @@ jobs:
       run: |
         repo init -u https://github.com/fgretief/angstrom-manifest -b angstrom-v2019.06-warrior
         repo sync
-    - name: Initialise source tree
+    - name: Build image
       run: |
         MACHINE=raspberrypi source ./setup-environment
         MACHINE=raspberrypi bitbake core-image-minimal
