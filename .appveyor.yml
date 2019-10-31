@@ -19,3 +19,5 @@ build_script:
     MACHINE=raspberrypi source ./setup-environment
 - sh: >-
     MACHINE=raspberrypi bitbake core-image-minimal
+- sh: >-
+    MACHINE=raspberrypi bitbake core-image-minimal -c populate_sdk_ext
